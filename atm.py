@@ -83,27 +83,24 @@ def add_new_user():
     last_name = input("Enter last name: ")
     balance = input("Enter initial balance: ")
     pin = input("Enter 4-digit PIN: ")
-    
-    # Generate account number using the autonumber file
-    acc_no = get_new_account_number()
 
-    # Create username as 'firstname<generated account number>'
+    while True:
+        # Generate account number using the autonumber file
+        acc_no = get_new_account_number()
+        user_file = f"users/{acc_no}.txt"
+
+        if not os.path.exists(user_file):
+            break   # found a free number → exit loop
+
+    # Create username and password
     username = f"{first_name.lower()}{acc_no}"
-
-    # Create password as 'username@accNo**'
     password = f"{username}@{acc_no}**"
 
-    # Save user data in a list
+    # Save user data
     user_data = [str(acc_no), first_name, last_name, balance, username, password, pin]
-    user_file = f"users/{acc_no}.txt"
-    
-    if os.path.exists(user_file):
-        print("Account already exists!")
-    else:
-        with open(user_file, 'w') as f:
-            f.write(','.join(user_data))
-        print(f"New user added successfully with account number: {acc_no}")
-
+    with open(user_file, 'w') as f:
+        f.write(','.join(user_data))
+    print(f"New user added successfully with account number: {acc_no}")
 
 
 
