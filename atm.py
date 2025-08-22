@@ -14,7 +14,8 @@ def admin_login():
     password = input("Enter password: ")
     secret_code = input("Enter secret code: ")
     
-    admin_file = "mini_project/admin/admin1.txt"
+    # admin_file = "admin\admin1.txt"
+    admin_file = os.path.join("admin", "admin1.txt")
     if os.path.exists(admin_file):
         with open(admin_file, 'r') as f:
             admin_data = f.readline().strip().split(',')
@@ -94,7 +95,7 @@ def add_new_user():
 
     # Save user data in a list
     user_data = [str(acc_no), first_name, last_name, balance, username, password, pin]
-    user_file = f"mini_project/users/{acc_no}.txt"
+    user_file = f"users/{acc_no}.txt"
     
     if os.path.exists(user_file):
         print("Account already exists!")
@@ -107,7 +108,7 @@ def add_new_user():
 
 
 def view_all_users():
-    user_dir = "mini_project/users"
+    user_dir = "users"
     if not os.path.exists(user_dir):
         print("User directory not found!")
         return
@@ -129,7 +130,7 @@ def view_all_users():
 
 def delete_user():
     acc_no = input("Enter account number to delete: ")
-    file_path = f"mini_project/users/{acc_no}.txt"
+    file_path = f"users/{acc_no}.txt"
     if os.path.exists(file_path):
         os.remove(file_path)
         print(f"User with account number {acc_no} deleted successfully.")
@@ -138,7 +139,7 @@ def delete_user():
 
 def update_user():
     acc_no = input("Enter account number to update: ")
-    file_path = f"mini_project/users/{acc_no}.txt"
+    file_path = f"users/{acc_no}.txt"
 
     if not os.path.exists(file_path):
         print("Account not found.")
@@ -182,7 +183,7 @@ def user_login():
     username = input("Enter username: ")
     password = input("Enter password: ")
     
-    user_file = f"mini_project/users/{acc_no}.txt"
+    user_file = f"users/{acc_no}.txt"
     if os.path.exists(user_file):
         with open(user_file, 'r') as f:
             user_data = f.readline().strip().split(',')
@@ -255,7 +256,7 @@ def transfer(user_data):
     amount = float(input("Enter amount to transfer: ₹"))
     pin = input("Enter PIN: ")
     
-    target_file = f"mini_project/users/{target_acc}.txt"
+    target_file = f"users/{target_acc}.txt"
     if pin == user_data[6]:
         if os.path.exists(target_file):
             current_balance = float(user_data[3])
@@ -293,7 +294,7 @@ def change_pin(user_data):
 def update_user_file(user_data, acc_no=None):
     if acc_no is None:
         acc_no = user_data[0]
-    with open(f"mini_project/users/{acc_no}.txt", 'w') as f:  # <-- fix path
+    with open(f"users/{acc_no}.txt", 'w') as f:  # <-- fix path
         f.write(','.join(user_data))
 
 
