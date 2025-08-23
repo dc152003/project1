@@ -9,7 +9,7 @@ It provides both **Admin** and **User** functionalities such as adding accounts,
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/<your-username>/<your-repo-name>.git
+   git clone https://github.com/dc152003/project1.git
    cd <your-repo-name>
 
 2. Make sure you are inside the project folder where atm.py is located.
